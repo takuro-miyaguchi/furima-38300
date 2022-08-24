@@ -4,9 +4,14 @@
 
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false               |
-| name               | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birth_date         | date   | null: false               |
 
 ### Association
 
@@ -16,42 +21,53 @@
 
 ## items テーブル
 
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| title     | string     | null: false                    |
-| concept   | text       | null: false                    |
-| category  | string     | null: false                    |
-| price     | integer    | null: false                    |
-| seller    | references | null: false, foreign_key: true |
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| image        | integer    | null: false                    |
+| title        | string     | null: false                    |
+| concept      | text       | null: false                    |
+| category_id  | integer    | null: false                    |
+| condition_id | integer    | null: false                    |
+| charge_id    | integer    | null: false                    |
+| sender_id    | integer    | null: false                    |
+| period_id    | integer    | null: false                    |
+| price        | integer    | null: false                    |
+| user         | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- has_one :purchase_records
+- belongs_to :user
+- has_one :purchase_record
 
 
 ## purchase_records テーブル
 
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| item      | string     | null: false, foreign_key: true |
-| buyer     | references | null: false, foreign_key: true |
+| Column   | Type       | Options                        |
+| -------- | ---------- | ------------------------------ |
+| item     | string     | null: false, foreign_key: true |
+| user     | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
-- has_one :shipping_addresses
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping_address
 
 
 ## shipping_addresses テーブル
 
-| Column       | Type     | Options       |
-| ------------ | -------- | ------------- |
-| post_cord    | integer  | null: false   |
-| address      | string   | null: false   |
-| phone_number | integer  | null: false   |
+| Column        | Type     | Options       |
+| ------------- | -------- | ------------- |
+| card_number   | integer  | null: false   |
+| expiration    | integer  | null: false   |
+| security_code | integer  | null: false   |
+| post_code     | integer  | null: false   |
+| prefecture_id | integer  | null: false   |
+| municipality  | string   | null: false   |
+| address       | string   | null: false   |
+| building      | string   |               |
+| phone_number  | integer  | null: false   |
 
 ### Association
 
-- belongs_to :purchase_records
+- belongs_to :purchase_record
