@@ -23,7 +23,6 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| image        | integer    | null: false                    |
 | title        | string     | null: false                    |
 | concept      | text       | null: false                    |
 | category_id  | integer    | null: false                    |
@@ -56,17 +55,15 @@
 
 ## shipping_addresses テーブル
 
-| Column        | Type     | Options       |
-| ------------- | -------- | ------------- |
-| card_number   | integer  | null: false   |
-| expiration    | integer  | null: false   |
-| security_code | integer  | null: false   |
-| post_code     | integer  | null: false   |
-| prefecture_id | integer  | null: false   |
-| municipality  | string   | null: false   |
-| address       | string   | null: false   |
-| building      | string   |               |
-| phone_number  | integer  | null: false   |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| post_code       | string     | null: false                    |
+| prefecture_id   | integer    | null: false                    |
+| municipality    | string     | null: false                    |
+| address         | string     | null: false                    |
+| building        | string     |                                |
+| phone_number    | string     | null: false                    |
+| purchase_record | references | null: false, foreign_key: true |
 
 ### Association
 
