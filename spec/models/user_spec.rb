@@ -151,12 +151,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birth date can't be blank")
       end
-
-      # it 'nicknameが7文字以上では登録できない' do
-        # @user.nickname = 'aaaaaaa'
-        # @user.valid?
-        # expect(@user.errors.full_messages).to include('Nickname is too long (maximum is 6 characters)')
-      # end
     end
   end
 end
