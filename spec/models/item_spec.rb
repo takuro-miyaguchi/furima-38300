@@ -80,7 +80,7 @@ RSpec.describe Item, type: :model do
       it 'priceが空では出品できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
       # 価格が¥300~¥9,999,999の間のみ保存可能であること。
