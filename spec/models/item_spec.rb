@@ -13,6 +13,13 @@ RSpec.describe Item, type: :model do
     end
 
     context '出品できないとき' do
+      # ログイン状態が必須であること。
+      it 'userが紐づいていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
+
       # 商品画像を1枚つけることが必須であること。
       it 'imageが空では出品できない' do
         @item.image = nil
@@ -73,7 +80,7 @@ RSpec.describe Item, type: :model do
       it 'priceが空では出品できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid")
+        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
       end
 
       # 価格が¥300~¥9,999,999の間のみ保存可能であること。
