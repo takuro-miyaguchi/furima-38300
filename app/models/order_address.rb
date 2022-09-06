@@ -9,6 +9,8 @@ class OrderAddress
     validates :municipality, format: { with: /\A[a-z A-Zぁ-んァ-ヶ一-龥々ー]+\z/, message: "全角文字+半角英字のみ有効" }
     validates :address
     validates :phone_number, format: { with: /\A\d{10}\z|\A\d{11}\z/ , message: "半角の10〜11桁のみ有効" }
+    validates :item_id
+    validates :user_id
     validates :token
   end
 

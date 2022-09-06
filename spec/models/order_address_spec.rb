@@ -7,12 +7,26 @@ RSpec.describe OrderAddress, type: :model do
 
   describe '商品購入' do
     context '購入できるとき' do
-      it 'tokenとpost_code、sender_id、municipality、address、building、phone_numberが存在すれば購入できる' do
+      it 'item_idとuser_id、token、post_code、sender_id、municipality、address、building、phone_numberが存在すれば購入できる' do
         expect(@order_address).to be_valid
       end
     end
 
     context '購入できないとき' do
+      # 商品情報が必須であること。
+      it "item_idが空では登録できないこと" do
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
+      end
+
+      # ユーザー情報が必須であること。
+      it "user_idが空では登録できないこと" do
+        @order_address.user_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end
+
       # クレジットカード情報が必須であること。
       it "tokenが空では登録できないこと" do
         @order_address.token = nil
