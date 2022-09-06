@@ -2,13 +2,13 @@ class OrderAddress
   include ActiveModel::Model
   attr_accessor :item_id, :user_id, :token, :post_code, :sender_id, :municipality, :address, :building, :phone_number
 
-  validates :sender_id, numericality: { other_than: 0, message: "can't be blank" }
+  validates :sender_id, numericality: { other_than: 1 , message: "can't be blank"} 
 
   with_options presence: true do
-    validates :post_code,    format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
-    validates :municipality, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "is invalid. Input full-width characters." }
+    validates :post_code,    format: { with: /\A\d{3}[-]\d{4}\z/, message: "半角の3桁+ハイフン+4桁のみ有効" }
+    validates :municipality, format: { with: /\A[a-z A-Zぁ-んァ-ヶ一-龥々ー]+\z/, message: "全角文字+半角英字のみ有効" }
     validates :address
-    validates :phone_number, format: { with: /\A\d{10}\z|\A\d{11}\z/ , message: "is invalid." }
+    validates :phone_number, format: { with: /\A\d{10}\z|\A\d{11}\z/ , message: "半角の10〜11桁のみ有効" }
     validates :token
   end
 
