@@ -6,8 +6,6 @@ FactoryBot.define do
     address        {Faker::Address.street_address}
     building       {"柳ビル103"}
     phone_number   {"0#{rand(0..9)}0#{rand(1_000_000..99_999_999)}"}
-    item_id        {1}
-    user_id        {1}
     token          {"tok_abcdefghijk00000000000000000"}
   end
 end
