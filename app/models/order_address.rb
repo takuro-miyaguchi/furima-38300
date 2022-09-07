@@ -6,7 +6,7 @@ class OrderAddress
 
   with_options presence: true do
     validates :post_code,    format: { with: /\A\d{3}[-]\d{4}\z/, message: "半角の3桁+ハイフン+4桁のみ有効" }
-    validates :municipality, format: { with: /\A[a-z A-Zぁ-んァ-ヶ一-龥々ー]+\z/, message: "全角文字+半角英字のみ有効" }
+    validates :municipality
     validates :address
     validates :phone_number, format: { with: /\A\d{10}\z|\A\d{11}\z/ , message: "半角の10〜11桁のみ有効" }
     validates :item_id
