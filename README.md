@@ -16,34 +16,34 @@
 ### Association
 
 - has_many :items
-- has_many :purchase_records
+- has_many :orders
 
 
 ## items テーブル
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| title        | string     | null: false                    |
-| concept      | text       | null: false                    |
-| category_id  | integer    | null: false                    |
-| condition_id | integer    | null: false                    |
-| charge_id    | integer    | null: false                    |
-| sender_id    | integer    | null: false                    |
-| period_id    | integer    | null: false                    |
-| price        | integer    | null: false                    |
+| title        | string     | null: false                    |商品名
+| concept      | text       | null: false                    |商品の説明
+| category_id  | integer    | null: false                    |カテゴリー
+| condition_id | integer    | null: false                    |商品の状態
+| charge_id    | integer    | null: false                    |配送料の負担
+| sender_id    | integer    | null: false                    |発送元の地域
+| period_id    | integer    | null: false                    |発送日の目安
+| price        | integer    | null: false                    |価格
 | user         | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one :purchase_record
+- has_one :order
 
 
-## purchase_records テーブル
+## orders テーブル
 
 | Column   | Type       | Options                        |
 | -------- | ---------- | ------------------------------ |
-| item     | string     | null: false, foreign_key: true |
+| item     | references | null: false, foreign_key: true |
 | user     | references | null: false, foreign_key: true |
 
 ### Association
@@ -55,16 +55,16 @@
 
 ## shipping_addresses テーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| post_code       | string     | null: false                    |
-| prefecture_id   | integer    | null: false                    |
-| municipality    | string     | null: false                    |
-| address         | string     | null: false                    |
-| building        | string     |                                |
-| phone_number    | string     | null: false                    |
-| purchase_record | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| post_code     | string     | null: false                    |郵便番号
+| sender_id     | integer    | null: false                    |都道府県
+| municipality  | string     | null: false                    |市区町村
+| address       | string     | null: false                    |番地
+| building      | string     |                                |建物名
+| phone_number  | string     | null: false                    |電話番号
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :purchase_record
+- belongs_to :order
